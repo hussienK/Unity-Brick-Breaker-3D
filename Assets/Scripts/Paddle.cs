@@ -15,7 +15,7 @@ public class Paddle : MonoBehaviour
     private BoxCollider col;
 
     //changable variables
-    private float speed = 10;
+    private float speed = 15;
     [SerializeField] private float newSize = 2f;
 
     [Header("Paddle Parts")]

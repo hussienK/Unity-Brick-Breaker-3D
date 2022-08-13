@@ -13,9 +13,12 @@ public class Ball : MonoBehaviour
 
     private bool ballStarted;
 
+    [SerializeField] TrailRenderer Trail;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        Trail.enabled = false;
     }
 
     //when hits something
@@ -57,6 +60,7 @@ public class Ball : MonoBehaviour
             //set parent to null to allow movement
             ballStarted = true;
             transform.SetParent(transform.parent.parent);
+            Trail.enabled = true;
         }
     }
     //to check ball condition

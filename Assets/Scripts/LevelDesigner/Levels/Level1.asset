@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74a77a377c1835644b07c050224a1ba3, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: 
-  gridSize: {x: 4, y: 4}
+  gridSize: {x: 4, y: 5}
   rows:
+  - columns: 00000000010000000100000000000000
   - columns: 01000000010000000100000001000000
   - columns: 01000000010000000100000001000000
   - columns: 01000000010000000100000001000000

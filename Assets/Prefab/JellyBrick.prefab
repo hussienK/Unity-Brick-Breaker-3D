@@ -108,3 +108,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   score: 50
+  explostionEffect: {fileID: 1706602693672461837, guid: 382d136bfe2edd54ebe767ee75541dcf,
+    type: 3}

@@ -12,6 +12,7 @@ public class Brick : MonoBehaviour
     //score given to player when destroyed
     public int score = 50;
 
+    [SerializeField] private GameObject explostionEffect;
     private void Start()
     {
         //add brick to gameManager
@@ -25,6 +26,7 @@ public class Brick : MonoBehaviour
 
         if (health <= 0)
         {
+            Instantiate(explostionEffect, transform.position, Quaternion.identity);
             GameManager.Instance.RemoveBrick(this.gameObject);
             ScoreManager.Instance.AddScore(score);
             Destroy(gameObject);

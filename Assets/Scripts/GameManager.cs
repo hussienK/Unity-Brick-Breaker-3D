@@ -22,6 +22,13 @@ public class GameManager : MonoBehaviour
 
     int lifes;
 
+    //references for gameObjects when game ends
+    [SerializeField] private GameObject winPanel;
+    [SerializeField] private GameObject losePanel;
+
+    //manage game loop
+    private bool gameEnded = false;
+
     private void Awake()
     {
         Instance = this;    
@@ -30,6 +37,10 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         ResetGame();
+
+        //set panels to not active
+        winPanel.SetActive(false);
+        losePanel.SetActive(false);
     }
 
     private void Update()
@@ -75,9 +86,16 @@ public class GameManager : MonoBehaviour
     {
         brickList.Remove(brick);
         //check if game should end
-        if (brickList.Count == 0)
+        if (brickList.Count == 0 && !gameEnded)
         {
-            Debug.Log("You Won!");
+            gameEnded = true;
+
+            if (gameEnded)
+            {
+                winPanel.SetActive(true);
+                Debug.Log("You Won!");
+            }
+
         }
     }
     #endregion
@@ -92,15 +110,23 @@ public class GameManager : MonoBehaviour
         UpdateLifesUI();
 
         //check if player lost
-        if (lifes <= 0)
+        if (lifes <= 0 && !gameEnded)
         {
-            Debug.Log("You Lost");
+            gameEnded = true;
+            if (gameEnded)
+            {
+                losePanel.SetActive(true);
+
+                Debug.Log("You Lost");
+            }
             return;
         }
-
-        //reset the paddle and get a new ball
-        CreateBall();
-        Paddle.Instance.ResetPaddlePosition();
+        if (!gameEnded)
+        {
+            //reset the paddle and get a new ball
+            CreateBall();
+            Paddle.Instance.ResetPaddlePosition();
+        }
     }
 
     //when a ball is lost into dead zone
@@ -111,7 +137,7 @@ public class GameManager : MonoBehaviour
         Destroy(ball);
 
         //if no more active balls remove a life
-        if (ballList.Count == 0)
+        if (ballList.Count == 0 && !gameEnded)
         {
             RemoveLife();
         }
@@ -120,7 +146,7 @@ public class GameManager : MonoBehaviour
     //update the life text ui
     private void UpdateLifesUI()
     {
-        lifesText.text = "Lifes: " + lifes.ToString("D2");
+        lifesText.text = lifes.ToString("D2");
     }
     #endregion
 
